@@ -20,14 +20,9 @@ type ProcessedResult struct {
   Recommendation string `json:"recommendation"`
 }
 
-//{"gas1":"345PH","gas2":"345PH","gas3":"345PH","gas4":"345PH","gas5":"345PH","gas6":"345PH"}
+//data: {"mq1":"345PH","mq2":"345PH","mq3":"345PH","mq4":"345PH","mq5":"345PH","mq135":"345PH"}
 type SnifferMessage struct {
-    Gas1 string `json:"gas1"`
-    Gas2 string `json:"gas2"`
-    Gas3 string `json:"gas3"`
-    Gas4 string `json:"gas4"`
-    Gas5 string `json:"gas5"`
-    Gas6 string `json:"gas6"`
+    Data string `json:"data"`
 }
 
 func processing(w http.ResponseWriter, r *http.Request) {
@@ -36,8 +31,10 @@ func processing(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewDecoder(r.Body).Decode(&msg)
 	
 	fmt.Println("Processor endpoint: Processing ...")
-	fmt.Println("Sniffer Message: => ", msg)
+	fmt.Println("Sniffer Message: => msg.Data = ", msg.Data)
+	
 	//TODO: process and attach processed data to the result
+	
 	result := &ProcessedResult{
 	    Date: "2021-12-26",
         Time: "09:40:04",
