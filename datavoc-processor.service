@@ -1,0 +1,21 @@
+[Unit]
+Description=DATAVOC processor service
+
+[Service]
+Type=simple
+User=root
+LimitNOFILE=infinity
+LimitNPROC=infinity
+LimitCORE=infinity
+
+Environment=PATH=/root/datavoc/server-pubsub/bin
+
+ExecStart=/root/datavoc/server-pubsub/bin/processor resurrect
+ExecReload=/root/datavoc/server-pubsub/bin/processor reload all
+ExecStop=/root/datavoc/server-pubsub/bin/processor kill
+RemainAfterExit=no
+Restart=on-failure
+RestartSec=2s
+
+[Install]
+WantedBy=multi-user.target
